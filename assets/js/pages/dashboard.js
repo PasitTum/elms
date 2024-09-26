@@ -1,9 +1,5 @@
 $( document ).ready(function() {
     
-    setTimeout(function(){ Materialize.toast('Welcome to Employee Leave Management System', 4000) }, 2000);
-    
-    
-    
     // CounterUp Plugin
     $('.counter').each(function () {
         $(this).prop('Counter',0).animate({
@@ -29,26 +25,51 @@ $( document ).ready(function() {
     $("span.pie").peity("pie")
     
     // Radar Chart
-    var ctx3 = document.getElementById("radar-chart").getContext("2d");
-    var data3 = {
-        labels: ["Eat", "Drink", "Sleep", "Work", "Code", "Cycle", "Run"],
-        datasets: [
-            {
-                label: "My First dataset",
-                fillColor: "rgba(241,202,58,0.2)",
-                strokeColor: "#F1CA3A",
-                pointColor: "#F1CA3A",
-                data: [65, 59, 90, 81, 56, 55, 40]
-            },
-            {
-                label: "My Second dataset",
-                fillColor: "rgba(83,168,251,0.2)",
-                strokeColor: "#53A8FB",
-                pointColor: "#53A8FB",
-                data: [28, 48, 40, 19, 96, 27, 100]
+    // ตรวจสอบว่ามี element ที่มี id เป็น "radar-chart" หรือไม่
+    var radarChartElement = document.getElementById("radar-chart");
+
+    if (radarChartElement) {
+        var ctx3 = radarChartElement.getContext("2d");
+        var data3 = {
+            labels: ["Eat", "Drink", "Sleep", "Work", "Code", "Cycle", "Run"],
+            datasets: [
+                {
+                    label: "My First dataset",
+                    backgroundColor: "rgba(241,202,58,0.2)",
+                    borderColor: "#F1CA3A",
+                    pointBackgroundColor: "#F1CA3A",
+                    data: [65, 59, 90, 81, 56, 55, 40]
+                },
+                {
+                    label: "My Second dataset",
+                    backgroundColor: "rgba(83,168,251,0.2)",
+                    borderColor: "#53A8FB",
+                    pointBackgroundColor: "#53A8FB",
+                    data: [28, 48, 40, 19, 96, 27, 100]
+                }
+            ]
+        };
+
+        // สร้าง Radar Chart
+        var myRadarChart = new Chart(ctx3, {
+            type: 'radar',
+            data: data3,
+            options: {
+                responsive: true,
+                scales: {
+                    r: {
+                        angleLines: {
+                            display: true
+                        },
+                        suggestedMin: 0,
+                        suggestedMax: 100
+                    }
+                }
             }
-        ]
-    };
+        });
+    } else {
+        console.log("Element with id 'radar-chart' not found. Radar chart cannot be created.");
+    }
 
     var myRadarChart = new Chart(ctx3).Radar(data3, {
         scaleShowLine : true,

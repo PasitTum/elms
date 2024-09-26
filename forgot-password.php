@@ -39,25 +39,6 @@ $msg="Your Password succesfully changed";
         <!-- Theme Styles -->
         <link href="assets/css/alpha.min.css" rel="stylesheet" type="text/css"/>
         <link href="assets/css/custom.css" rel="stylesheet" type="text/css"/>
-  <style>
-        .errorWrap {
-    padding: 10px;
-    margin: 0 0 20px 0;
-    background: #fff;
-    border-left: 4px solid #dd3d36;
-    -webkit-box-shadow: 0 1px 1px 0 rgba(0,0,0,.1);
-    box-shadow: 0 1px 1px 0 rgba(0,0,0,.1);
-}
-.succWrap{
-    padding: 10px;
-    margin: 0 0 20px 0;
-    background: #fff;
-    border-left: 4px solid #5cb85c;
-    -webkit-box-shadow: 0 1px 1px 0 rgba(0,0,0,.1);
-    box-shadow: 0 1px 1px 0 rgba(0,0,0,.1);
-}
-        </style>
-        
     </head>
     <body>
         <div class="loader-bg"></div>
@@ -110,57 +91,43 @@ $msg="Your Password succesfully changed";
                                 <span class="material-design-hamburger__layer"></span>
                             </a>
                         </section>
-                        <div class="header-title col s3">      
-                            <span class="chapter-title">ELMS | Employee Leave Management System</span>
+                        <div class="header-title col s4">
+                            <span class="chapter-title">โปรแกรมบันทึกการลางาน | Employee Leave Management System</span>
                         </div>
-                      
-                           
-                        </form>
-                     
-                        
                     </div>
                 </nav>
             </header>
-           
-           
             <aside id="slide-out" class="side-nav white fixed">
                 <div class="side-nav-wrapper">
-                   
-                  
-                <ul class="sidebar-menu collapsible collapsible-accordion" data-collapsible="accordion" style="">
-                    <li>&nbsp;</li>
-                    <li class="no-padding"><a class="waves-effect waves-grey" href="index.php"><i class="material-icons">account_box</i>Employe Login</a></li>
-                    <li class="no-padding"><a class="waves-effect waves-grey" href="forgot-password.php"><i class="material-icons">account_box</i>Emp Password Recovery</a></li>
-                
-                       <li class="no-padding"><a class="waves-effect waves-grey" href="admin/"><i class="material-icons">account_box</i>Admin Login</a></li>
-                
-                </ul>
-          <div class="footer">
-                    <p class="copyright">ELMS ©</p>
-                
-                </div>
+                    <ul class="sidebar-menu collapsible collapsible-accordion" data-collapsible="accordion" style="">
+                        <li>&nbsp;</li>
+                        <li class="no-padding"><a class="waves-effect waves-grey" href="index.php"><i class="material-icons">account_box</i>พนักงานเข้าสู่ระบบ</a></li>
+                        <li class="no-padding"><a class="waves-effect waves-grey" href="forgot-password.php"><i class="material-icons">account_box</i>ลืมรหัสผ่าน</a></li>
+                        <!-- <li class="no-padding"><a class="waves-effect waves-grey" href="admin/"><i class="material-icons">account_box</i>Admin Login</a></li> -->
+                    </ul>
+                    <div class="footer">
+                    </div>
                 </div>
             </aside>
             <main class="mn-inner">
                 <div class="row">
                     <div class="col s12">
-                        <div class="page-title"><h4>Employee Password Recovery</h4></div>
 
                           <div class="col s12 m6 l8 offset-l2 offset-m3">
                               <div class="card white darken-1">
 
                                   <div class="card-content ">
-                                      <span class="card-title" style="font-size:20px;">Employee details</span>
+                                      <span class="card-title" style="font-size:20px;">กู้คืนรหัสผ่าน</span>
                                          <?php if($msg){?><div class="succWrap"><strong>Success </strong> : <?php echo htmlentities($msg); ?> </div><?php }?>
                                        <div class="row">
                                            <form class="col s12" name="signin" method="post">
                                                <div class="input-field col s12">
                                                    <input id="empid" type="text" name="empid" class="validate" autocomplete="off" required >
-                                                   <label for="email">Employee Id</label>
+                                                   <label for="email">รหัสพนักงาน</label>
                                                </div>
                                                <div class="input-field col s12">
                                                    <input id="password" type="text" class="validate" name="emailid" autocomplete="off" required>
-                                                   <label for="password">Email id</label>
+                                                   <label for="password">อีเมล</label>
                                                </div>
                                                <div class="col s12 right-align m-t-sm">
                                                 
