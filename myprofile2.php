@@ -45,6 +45,9 @@ if (strlen($_SESSION['emplogin']) == 0) {
 
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
         <meta charset="UTF-8">
+        <meta name="description" content="Responsive Admin Dashboard Template" />
+        <meta name="keywords" content="admin,dashboard" />
+        <meta name="author" content="Steelcoders" />
 
         <!-- Styles -->
         <link type="text/css" rel="stylesheet" href="assets/plugins/materialize/css/materialize.min.css" />
@@ -52,6 +55,30 @@ if (strlen($_SESSION['emplogin']) == 0) {
         <link href="assets/plugins/material-preloader/css/materialPreloader.min.css" rel="stylesheet">
         <link href="assets/css/alpha.min.css" rel="stylesheet" type="text/css" />
         <link href="assets/css/custom.css" rel="stylesheet" type="text/css" />
+        <style>
+            .errorWrap {
+                padding: 10px;
+                margin: 0 0 20px 0;
+                background: #fff;
+                border-left: 4px solid #dd3d36;
+                -webkit-box-shadow: 0 1px 1px 0 rgba(0, 0, 0, .1);
+                box-shadow: 0 1px 1px 0 rgba(0, 0, 0, .1);
+            }
+
+            .succWrap {
+                padding: 10px;
+                margin: 0 0 20px 0;
+                background: #fff;
+                border-left: 4px solid #5cb85c;
+                -webkit-box-shadow: 0 1px 1px 0 rgba(0, 0, 0, .1);
+                box-shadow: 0 1px 1px 0 rgba(0, 0, 0, .1);
+            }
+        </style>
+
+
+
+
+
     </head>
 
     <body>
@@ -69,7 +96,7 @@ if (strlen($_SESSION['emplogin']) == 0) {
                             <form id="example-form" method="post" name="updatemp">
                                 <div>
                                     <h3>Update Employee Info</h3>
-                                    <?php if ($error) { ?><div class="errorWrap"><strong>ERROR</strong>:<?php echo htmlentities($error); ?> </div><?php } else if ($msg) { ?><div class="succWrap"><strong>บันทึกสำเร็จ]</strong> : <?php echo htmlentities($msg); ?> </div><?php } ?>
+                                    <?php if ($error) { ?><div class="errorWrap"><strong>ERROR</strong>:<?php echo htmlentities($error); ?> </div><?php } else if ($msg) { ?><div class="succWrap"><strong>SUCCESS</strong> : <?php echo htmlentities($msg); ?> </div><?php } ?>
                                     <section>
                                         <div class="wizard-content">
                                             <div class="row">
@@ -77,7 +104,7 @@ if (strlen($_SESSION['emplogin']) == 0) {
                                                     <div class="row">
                                                         <?php
                                                         $eid = $_SESSION['emplogin'];
-                                                        $sql = "SELECT * from  tblemployees where EmpId=:eid";
+                                                        $sql = "SELECT * from  tblemployees where EmailId=:eid";
                                                         $query = $dbh->prepare($sql);
                                                         $query->bindParam(':eid', $eid, PDO::PARAM_STR);
                                                         $query->execute();
@@ -86,9 +113,7 @@ if (strlen($_SESSION['emplogin']) == 0) {
                                                         if ($query->rowCount() > 0) {
                                                             foreach ($results as $result) {               ?>
                                                                 <div class="input-field col  s12">
-                                                                    <label for="empcode">
-                                                                        Employee Code
-                                                                    </label>
+                                                                    <label for="empcode">Employee Code</label>
                                                                     <input name="empcode" id="empcode" value="<?php echo htmlentities($result->EmpId); ?>" type="text" autocomplete="off" readonly required>
                                                                     <span id="empid-availability" style="font-size:12px;"></span>
                                                                 </div>
@@ -105,11 +130,12 @@ if (strlen($_SESSION['emplogin']) == 0) {
                                                                     <input name="email" type="email" id="email" value="<?php echo htmlentities($result->EmailId); ?>" readonly autocomplete="off" required>
                                                                     <span id="emailid-availability" style="font-size:12px;"></span>
                                                                 </div>
+
                                                                 <div class="input-field col s12">
                                                                     <label for="phone">Mobile number</label>
                                                                     <input id="phone" name="mobileno" type="tel" value="<?php echo htmlentities($result->Phonenumber); ?>" maxlength="10" autocomplete="off" required>
                                                                 </div>
-                                                            </div>
+                                                    </div>
                                                 </div>
 
                                                 <div class="col m6">
@@ -162,7 +188,9 @@ if (strlen($_SESSION['emplogin']) == 0) {
 
                                                     <div class="input-field col s12">
                                                         <button type="submit" name="update" id="update" class="waves-effect waves-light btn indigo m-b-xs">UPDATE</button>
+
                                                     </div>
+
                                                 </div>
                                             </div>
                                         </div>

@@ -29,7 +29,7 @@ if (strlen($_SESSION['alogin']) == 0) {
 <head>
 
     <!-- Title -->
-    <title>Admin | Add Leave Type</title>
+    <title>Admin | เพิ่มประเภทการลา</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <meta charset="UTF-8">
@@ -43,25 +43,6 @@ if (strlen($_SESSION['alogin']) == 0) {
     <link href="../assets/plugins/material-preloader/css/materialPreloader.min.css" rel="stylesheet">
     <link href="../assets/css/alpha.min.css" rel="stylesheet" type="text/css" />
     <link href="../assets/css/custom.css" rel="stylesheet" type="text/css" />
-    <style>
-    .errorWrap {
-        padding: 10px;
-        margin: 0 0 20px 0;
-        background: #fff;
-        border-left: 4px solid #dd3d36;
-        -webkit-box-shadow: 0 1px 1px 0 rgba(0, 0, 0, .1);
-        box-shadow: 0 1px 1px 0 rgba(0, 0, 0, .1);
-    }
-
-    .succWrap {
-        padding: 10px;
-        margin: 0 0 20px 0;
-        background: #fff;
-        border-left: 4px solid #5cb85c;
-        -webkit-box-shadow: 0 1px 1px 0 rgba(0, 0, 0, .1);
-        box-shadow: 0 1px 1px 0 rgba(0, 0, 0, .1);
-    }
-    </style>
 </head>
 
 <body>
@@ -71,31 +52,36 @@ if (strlen($_SESSION['alogin']) == 0) {
     <main class="mn-inner">
         <div class="row">
             <div class="col s12">
-                <div class="page-title">Add Leave Type</div>
+                <div class="page-title">เพิ่มประเภทการลา</div>
             </div>
             <div class="col s12 m12 l6">
                 <div class="card">
                     <div class="card-content">
                         <div class="row">
                             <form class="col s12" name="chngpwd" method="post">
-                                <?php if ($error) { ?><div class="errorWrap"><strong>ERROR</strong> :
+                                <?php if ($error) { ?><div class="errorWrap"><strong>เกิดข้อผิดพลาด</strong> :
                                     <?php echo htmlentities($error); ?> </div><?php } else if ($msg) { ?><div
-                                    class="succWrap"><strong>SUCCESS</strong> : <?php echo htmlentities($msg); ?> </div>
+                                    class="succWrap"><strong>บันทึกสำเร็จ</strong> : <?php echo htmlentities($msg); ?> </div>
                                 <?php } ?>
                                 <div class="row">
                                     <div class="input-field col s12">
                                         <input id="leavetype" type="text" class="validate" autocomplete="off"
                                             name="leavetype" required>
-                                        <label for="leavetype">Leave Type</label>
+                                        <label for="leavetype">
+                                            ประเภทการลา
+                                        </label>
                                     </div>
                                     <div class="input-field col s12">
                                         <textarea id="textarea1" name="description" class="materialize-textarea"
                                             name="description" length="500"></textarea>
-                                        <label for="deptshortname">Description</label>
+                                        <label for="deptshortname">
+                                            รายละเอียด
+                                        </label>
                                     </div>
                                     <div class="input-field col s12">
-                                        <button type="submit" name="add"
-                                            class="waves-effect waves-light btn indigo m-b-xs">ADD</button>
+                                        <button type="submit" name="add" class="waves-effect waves-light btn indigo m-b-xs">
+                                            เพิ่ม
+                                        </button>
                                     </div>
                                 </div>
                             </form>

@@ -16,9 +16,6 @@ if (strlen($_SESSION['alogin']) == 0) {
 
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
         <meta charset="UTF-8">
-        <meta name="description" content="Responsive Admin Dashboard Template" />
-        <meta name="keywords" content="admin,dashboard" />
-        <meta name="author" content="Steelcoders" />
 
         <!-- Styles -->
         <link type="text/css" rel="stylesheet" href="../assets/plugins/materialize/css/materialize.min.css" />
@@ -30,25 +27,6 @@ if (strlen($_SESSION['alogin']) == 0) {
         <!-- Theme Styles -->
         <link href="../assets/css/alpha.min.css" rel="stylesheet" type="text/css" />
         <link href="../assets/css/custom.css" rel="stylesheet" type="text/css" />
-        <style>
-            .errorWrap {
-                padding: 10px;
-                margin: 0 0 20px 0;
-                background: #fff;
-                border-left: 4px solid #dd3d36;
-                -webkit-box-shadow: 0 1px 1px 0 rgba(0, 0, 0, .1);
-                box-shadow: 0 1px 1px 0 rgba(0, 0, 0, .1);
-            }
-
-            .succWrap {
-                padding: 10px;
-                margin: 0 0 20px 0;
-                background: #fff;
-                border-left: 4px solid #5cb85c;
-                -webkit-box-shadow: 0 1px 1px 0 rgba(0, 0, 0, .1);
-                box-shadow: 0 1px 1px 0 rgba(0, 0, 0, .1);
-            }
-        </style>
     </head>
 
     <body>
@@ -58,7 +36,7 @@ if (strlen($_SESSION['alogin']) == 0) {
         <main class="mn-inner">
             <div class="row">
                 <div class="col s12">
-                    <div class="page-title">Pending Leave History</div>
+                    <div class="page-title">การลาที่รอพิจารณา</div>
                 </div>
 
                 <div class="col s12 m12 l12">
@@ -72,7 +50,6 @@ if (strlen($_SESSION['alogin']) == 0) {
                                         <th>#</th>
                                         <th width="200">Employe Name</th>
                                         <th width="120">Leave Type</th>
-
                                         <th width="180">Posting Date</th>
                                         <th>Status</th>
                                         <th align="center">Action</th>
@@ -100,20 +77,20 @@ if (strlen($_SESSION['alogin']) == 0) {
                                                 <td><?php $stats = $result->Status;
                                                     if ($stats == 1) {
                                                     ?>
-                                                        <span style="color: green">Approved</span>
+                                                        <span style="color: green">อนุมัติ</span>
                                                     <?php }
                                                     if ($stats == 2) { ?>
-                                                        <span style="color: red">Not Approved</span>
+                                                        <span style="color: red">ไม่อนุมัติ</span>
                                                     <?php }
                                                     if ($stats == 0) { ?>
-                                                        <span style="color: blue">waiting for approval</span>
+                                                        <span style="color: blue">รอพิจารณา</span>
                                                     <?php } ?>
 
 
                                                 </td>
 
                                                 <td>
-                                                <td><a href="leave-details.php?leaveid=<?php echo htmlentities($result->lid); ?>" class="waves-effect waves-light btn blue m-b-xs"> View Details</a></td>
+                                                <td><a href="leave-details.php?leaveid=<?php echo htmlentities($result->lid); ?>" class="waves-effect waves-light btn blue m-b-xs"> ดูรายละเอียด</a></td>
                                             </tr>
                                     <?php $cnt++;
                                         }

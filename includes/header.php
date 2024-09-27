@@ -37,16 +37,17 @@
                                     $results = $query->fetchAll(PDO::FETCH_OBJ);
                                     if ($query->rowCount() > 0) {
                                         foreach ($results as $result) {               ?>
-                                            <li>
-                                                <a href="leave-details.php?leaveid=<?php echo htmlentities($result->lid); ?>">
-                                                    <div class="notification">
-                                                        <div class="notification-icon circle cyan"><i class="material-icons">done</i></div>
-                                                        <div class="notification-text">
-                                                            <p><b><?php echo htmlentities($result->FirstName . " " . $result->LastName); ?><br />(<?php echo htmlentities($result->EmpId); ?>)</b> applied for leave</p><span>at <?php echo htmlentities($result->PostingDate); ?></b< /span>
+                                                <li>
+                                                    <a href="javascript:void(0);" onclick="markAsRead(<?php echo htmlentities($result->lid); ?>)">
+                                                        <div class="notification">
+                                                            <div class="notification-icon circle cyan"><i class="material-icons">done</i></div>
+                                                            <div class="notification-text">
+                                                                <p><b><?php echo htmlentities($result->FirstName . " " . $result->LastName); ?><br />(<?php echo htmlentities($result->EmpId); ?>)</b> applied for leave</p>
+                                                                <span>at <?php echo htmlentities($result->PostingDate); ?></span>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                </a>
-                                            </li>
+                                                    </a>
+                                                </li>
                                     <?php }
                                     } ?>
 

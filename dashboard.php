@@ -186,6 +186,8 @@ if (strlen($_SESSION['emplogin']) == 0) {
         <script src="assets/plugins/peity/jquery.peity.min.js"></script>
         <script src="assets/js/alpha.min.js"></script>
         <script src="assets/js/pages/dashboard.js"></script>
+        <script src="assets/js/pages/notification.js"></script>
+
 
     </body>
 

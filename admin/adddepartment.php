@@ -31,13 +31,10 @@ if (strlen($_SESSION['alogin']) == 0) {
     <head>
 
         <!-- Title -->
-        <title>Admin | Add Department</title>
+        <title>Admin | เพิ่มแผนก</title>
 
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
         <meta charset="UTF-8">
-        <meta name="description" content="Responsive Admin Dashboard Template" />
-        <meta name="keywords" content="admin,dashboard" />
-        <meta name="author" content="Steelcoders" />
 
         <!-- Styles -->
         <link type="text/css" rel="stylesheet" href="../assets/plugins/materialize/css/materialize.min.css" />
@@ -45,25 +42,6 @@ if (strlen($_SESSION['alogin']) == 0) {
         <link href="../assets/plugins/material-preloader/css/materialPreloader.min.css" rel="stylesheet">
         <link href="../assets/css/alpha.min.css" rel="stylesheet" type="text/css" />
         <link href="../assets/css/custom.css" rel="stylesheet" type="text/css" />
-        <style>
-            .errorWrap {
-                padding: 10px;
-                margin: 0 0 20px 0;
-                background: #fff;
-                border-left: 4px solid #dd3d36;
-                -webkit-box-shadow: 0 1px 1px 0 rgba(0, 0, 0, .1);
-                box-shadow: 0 1px 1px 0 rgba(0, 0, 0, .1);
-            }
-
-            .succWrap {
-                padding: 10px;
-                margin: 0 0 20px 0;
-                background: #fff;
-                border-left: 4px solid #5cb85c;
-                -webkit-box-shadow: 0 1px 1px 0 rgba(0, 0, 0, .1);
-                box-shadow: 0 1px 1px 0 rgba(0, 0, 0, .1);
-            }
-        </style>
     </head>
 
     <body>
@@ -73,7 +51,7 @@ if (strlen($_SESSION['alogin']) == 0) {
         <main class="mn-inner">
             <div class="row">
                 <div class="col s12">
-                    <div class="page-title">Add Department</div>
+                    <div class="page-title">เพิ่มแผนก</div>
                 </div>
                 <div class="col s12 m12 l6">
                     <div class="card">
@@ -81,45 +59,29 @@ if (strlen($_SESSION['alogin']) == 0) {
 
                             <div class="row">
                                 <form class="col s12" name="chngpwd" method="post">
-                                    <?php if ($error) { ?><div class="errorWrap"><strong>ERROR</strong>:<?php echo htmlentities($error); ?> </div><?php } else if ($msg) { ?><div class="succWrap"><strong>SUCCESS</strong>:<?php echo htmlentities($msg); ?> </div><?php } ?>
+                                    <?php if ($error) { ?><div class="errorWrap"><strong>เกิดข้อผิดพลาด</strong>:<?php echo htmlentities($error); ?> </div><?php } else if ($msg) { ?><div class="succWrap"><strong>บันทึกสำเร็จ</strong>:<?php echo htmlentities($msg); ?> </div><?php } ?>
                                     <div class="row">
                                         <div class="input-field col s12">
                                             <input id="departmentname" type="text" class="validate" autocomplete="off" name="departmentname" required>
-                                            <label for="deptname">Department Name</label>
+                                            <label for="deptname">ชื่อแผนก</label>
                                         </div>
-
-
                                         <div class="input-field col s12">
                                             <input id="departmentshortname" type="text" class="validate" autocomplete="off" name="departmentshortname" required>
-                                            <label for="deptshortname">Department Short Name</label>
+                                            <label for="deptshortname">ชื่อย่อแผนก</label>
                                         </div>
                                         <div class="input-field col s12">
                                             <input id="deptcode" type="text" name="deptcode" class="validate" autocomplete="off" required>
-                                            <label for="password">Department Code</label>
+                                            <label for="password">รหัสแผนก</label>
                                         </div>
-
-
-
-
                                         <div class="input-field col s12">
-                                            <button type="submit" name="add" class="waves-effect waves-light btn indigo m-b-xs">ADD</button>
-
+                                            <button type="submit" name="add" class="waves-effect waves-light btn indigo m-b-xs">เพิ่ม</button>
                                         </div>
-
-
-
-
                                     </div>
-
                                 </form>
                             </div>
                         </div>
                     </div>
-
-
-
                 </div>
-
             </div>
         </main>
 

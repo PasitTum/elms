@@ -5,7 +5,7 @@ include('includes/config.php');
 if (isset($_POST['signin'])) {
     $uname = $_POST['username'];
     $password = md5($_POST['password']);
-    $sql = "SELECT EmailId,Password,Status,id FROM tblemployees WHERE EmailId=:uname and Password=:password";
+    $sql = "SELECT EmailId,Password,Status,id FROM tblemployees WHERE EmpId=:uname and Password=:password";
     $query = $dbh->prepare($sql);
     $query->bindParam(':uname', $uname, PDO::PARAM_STR);
     $query->bindParam(':password', $password, PDO::PARAM_STR);
@@ -127,7 +127,7 @@ if (isset($_POST['signin'])) {
                     <li>&nbsp;</li>
                     <li class="no-padding"><a class="waves-effect waves-grey" href="index.php"><i class="material-icons">account_box</i>พนักงานเข้าสู่ระบบ</a></li>
                     <li class="no-padding"><a class="waves-effect waves-grey" href="forgot-password.php"><i class="material-icons">account_box</i>ลืมรหัสผ่าน</a></li>
-                    <!-- <li class="no-padding"><a class="waves-effect waves-grey" href="admin/"><i class="material-icons">account_box</i>Admin Login</a></li> -->
+                    <li class="no-padding"><a class="waves-effect waves-grey" href="admin/"><i class="material-icons">account_box</i>Admin Login</a></li>
                 </ul>
                 <div class="footer">
                 </div>
@@ -150,7 +150,7 @@ if (isset($_POST['signin'])) {
                                     <form class="col s12" name="signin" method="post">
                                         <div class="input-field col s12">
                                             <input id="username" type="text" name="username" class="validate" autocomplete="off" required>
-                                            <label for="email">อีเมล</label>
+                                            <label for="empId">รหัสพนักงาน</label>
                                         </div>
                                         <div class="input-field col s12">
                                             <input id="password" type="password" class="validate" name="password" autocomplete="off" required>

@@ -17,9 +17,6 @@ if (strlen($_SESSION['emplogin']) == 0) {
 
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
         <meta charset="UTF-8">
-        <meta name="description" content="Responsive Admin Dashboard Template" />
-        <meta name="keywords" content="admin,dashboard" />
-        <meta name="author" content="Steelcoders" />
 
         <!-- Styles -->
         <link type="text/css" rel="stylesheet" href="assets/plugins/materialize/css/materialize.min.css" />
@@ -31,25 +28,6 @@ if (strlen($_SESSION['emplogin']) == 0) {
         <!-- Theme Styles -->
         <link href="assets/css/alpha.min.css" rel="stylesheet" type="text/css" />
         <link href="assets/css/custom.css" rel="stylesheet" type="text/css" />
-        <style>
-            .errorWrap {
-                padding: 10px;
-                margin: 0 0 20px 0;
-                background: #fff;
-                border-left: 4px solid #dd3d36;
-                -webkit-box-shadow: 0 1px 1px 0 rgba(0, 0, 0, .1);
-                box-shadow: 0 1px 1px 0 rgba(0, 0, 0, .1);
-            }
-
-            .succWrap {
-                padding: 10px;
-                margin: 0 0 20px 0;
-                background: #fff;
-                border-left: 4px solid #5cb85c;
-                -webkit-box-shadow: 0 1px 1px 0 rgba(0, 0, 0, .1);
-                box-shadow: 0 1px 1px 0 rgba(0, 0, 0, .1);
-            }
-        </style>
     </head>
 
     <body>
@@ -59,24 +37,24 @@ if (strlen($_SESSION['emplogin']) == 0) {
         <main class="mn-inner">
             <div class="row">
                 <div class="col s12">
-                    <div class="page-title">Leave History</div>
+                    <div class="page-title">ประวัติการลา</div>
                 </div>
 
                 <div class="col s12 m12 l12">
                     <div class="card">
                         <div class="card-content">
-                            <span class="card-title">Leave History</span>
+                            <span class="card-title">ประวัติการลา</span>
                             <?php if ($msg) { ?><div class="succWrap"><strong>SUCCESS</strong> : <?php echo htmlentities($msg); ?> </div><?php } ?>
                             <table id="example" class="display responsive-table ">
                                 <thead>
                                     <tr>
-                                        <th>#</th>
-                                        <th width="120">Leave Type</th>
-                                        <th>From</th>
-                                        <th>To</th>
-                                        <th width="120">Posting Date</th>
-                                        <th>Status</th>
-                                        <th>Action</th>
+                                        <th class="center">#</th>
+                                        <th class="center" width="120">ประเภทการลา</th>
+                                        <th class="center">วันที่</th>
+                                        <th class="center">ถึง</th>
+                                        <th class="center" width="130">วันที่สร้างข้อมูล</th>
+                                        <th class="center">สถานะ</th>
+                                        <th class="center">Action</th>
                                     </tr>
                                 </thead>
 
@@ -92,13 +70,13 @@ if (strlen($_SESSION['emplogin']) == 0) {
                                     if ($query->rowCount() > 0) {
                                         foreach ($results as $result) {               ?>
                                             <tr>
-                                                <td> <?php echo htmlentities($cnt); ?></td>
-                                                <td><?php echo htmlentities($result->LeaveType); ?></td>
-                                                <td><?php echo htmlentities($result->FromDate); ?></td>
-                                                <td><?php echo htmlentities($result->ToDate); ?></td>
-                                                <td><?php echo htmlentities($result->PostingDate); ?></td>
+                                                <td class="center"> <?php echo htmlentities($cnt); ?></td>
+                                                <td class="center"><?php echo htmlentities($result->LeaveType); ?></td>
+                                                <td class="center"><?php echo htmlentities($result->FromDate); ?></td>
+                                                <td class="center"><?php echo htmlentities($result->ToDate); ?></td>
+                                                <td class="center"><?php echo htmlentities($result->PostingDate); ?></td>
 
-                                                <td><?php $stats = $result->Status;
+                                                <td class="center"><?php $stats = $result->Status;
                                                     if ($stats == 1) {
                                                     ?>
                                                         <span style="color: green">Approved</span>
@@ -111,7 +89,7 @@ if (strlen($_SESSION['emplogin']) == 0) {
                                                     <?php } ?>
 
                                                 </td>
-                                                <td>
+                                                <td class="center">
                                                     <a href="leave-details.php?leaveid=<?php echo htmlentities($result->lid); ?>" class="waves-effect waves-light btn blue m-b-xs"> View Details</a>
                                                 </td>
                                             </tr>
@@ -137,6 +115,7 @@ if (strlen($_SESSION['emplogin']) == 0) {
         <script src="assets/plugins/datatables/js/jquery.dataTables.min.js"></script>
         <script src="assets/js/alpha.min.js"></script>
         <script src="assets/js/pages/table-data.js"></script>
+        <script src="assets/js/pages/notification.js"></script>
 
     </body>
 
