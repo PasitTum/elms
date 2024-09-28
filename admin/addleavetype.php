@@ -8,10 +8,12 @@ if (strlen($_SESSION['alogin']) == 0) {
     if (isset($_POST['add'])) {
         $leavetype = $_POST['leavetype'];
         $description = $_POST['description'];
-        $sql = "INSERT INTO tblleavetype(LeaveType,Description) VALUES(:leavetype,:description)";
+        $maxdays = $_POST['maxdays'];
+        $sql = "INSERT INTO tblleavetype(LeaveType,Description,MaxDays) VALUES(:leavetype,:description,:maxdays)";
         $query = $dbh->prepare($sql);
         $query->bindParam(':leavetype', $leavetype, PDO::PARAM_STR);
         $query->bindParam(':description', $description, PDO::PARAM_STR);
+        $query->bindParam(':maxdays', $maxdays, PDO::PARAM_INT);
         $query->execute();
         $lastInsertId = $dbh->lastInsertId();
         if ($lastInsertId) {
@@ -76,6 +78,13 @@ if (strlen($_SESSION['alogin']) == 0) {
                                             name="description" length="500"></textarea>
                                         <label for="deptshortname">
                                             รายละเอียด
+                                        </label>
+                                    </div>
+                                    <div class="input-field col s12">
+                                        <input id="maxdays" type="number" class="validate" autocomplete="off"
+                                            name="maxdays" required>
+                                        <label for="maxdays">
+                                            จำนวนวันลา
                                         </label>
                                     </div>
                                     <div class="input-field col s12">

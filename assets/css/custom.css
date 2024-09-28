@@ -25,3 +25,9 @@
     top: -14px;
     font-size: 0.8rem;
 }
+.avilable{
+    position: absolute;
+    font-size: 0.8rem;
+    left: 10px;
+    bottom: -5px; /* ปรับตามความเหมาะสม */
+}

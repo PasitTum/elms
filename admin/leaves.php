@@ -106,7 +106,6 @@ if (strlen($_SESSION['alogin']) == 0) {
         <script src="../assets/plugins/datatables/js/jquery.dataTables.min.js"></script>
         <script src="../assets/js/alpha.min.js"></script>
         <script src="../assets/js/pages/table-data.js"></script>
-        <script src="assets/js/pages/ui-modals.js"></script>
 
     </body>
 

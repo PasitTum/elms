@@ -21,13 +21,10 @@ if (strlen($_SESSION['alogin']) == 0) {
     <head>
 
         <!-- Title -->
-        <title>Admin | Manage Departments</title>
+        <title>Admin | จัดการแผนก</title>
 
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
         <meta charset="UTF-8">
-        <meta name="description" content="Responsive Admin Dashboard Template" />
-        <meta name="keywords" content="admin,dashboard" />
-        <meta name="author" content="Steelcoders" />
 
         <!-- Styles -->
         <link type="text/css" rel="stylesheet" href="../assets/plugins/materialize/css/materialize.min.css" />
@@ -47,22 +44,22 @@ if (strlen($_SESSION['alogin']) == 0) {
         <main class="mn-inner">
             <div class="row">
                 <div class="col s12">
-                    <div class="page-title">Manage Departments</div>
+                    <div class="page-title">จัดการแผนก</div>
                 </div>
                 <div class="col s12 m12 l12">
                     <div class="card">
                         <div class="card-content">
-                            <span class="card-title">Departments Info</span>
-                            <?php if ($msg) { ?><div class="succWrap"><strong>SUCCESS</strong> : <?php echo htmlentities($msg); ?> </div><?php } ?>
+                            <span class="card-title">ข้อมูลแผนก</span>
+                            <?php if ($msg) { ?><div class="succWrap"><strong>สำเร็จ</strong> : <?php echo htmlentities($msg); ?> </div><?php } ?>
                             <table id="example" class="display responsive-table ">
                                 <thead>
                                     <tr>
-                                        <th>Sr no</th>
-                                        <th>Dept Name</th>
-                                        <th>Dept Short Name</th>
-                                        <th>Dept Code</th>
-                                        <th>Creation Date</th>
-                                        <th>Action</th>
+                                        <th>#</th>
+                                        <th>แผนก</th>
+                                        <th>อักษรย่อ</th>
+                                        <th>รหัสแผนก</th>
+                                        <th>วันที่สร้าง</th>
+                                        <th>จัดการ</th>
                                     </tr>
                                 </thead>
                                 <tbody>

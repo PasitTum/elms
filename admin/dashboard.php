@@ -17,17 +17,13 @@ if (strlen($_SESSION['alogin']) == 0) {
 
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
         <meta charset="UTF-8">
-        <meta name="description" content="Responsive Admin Dashboard Template" />
-        <meta name="keywords" content="admin,dashboard" />
-        <meta name="author" content="
-        " />
 
         <!-- Styles -->
         <link type="text/css" rel="stylesheet" href="../assets/plugins/materialize/css/materialize.min.css" />
         <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <link href="../assets/plugins/metrojs/MetroJs.min.css" rel="stylesheet">
         <link href="../assets/plugins/weather-icons-master/css/weather-icons.min.css" rel="stylesheet">
-
+        <link href="../assets/plugins/datatables/css/jquery.dataTables.min.css" rel="stylesheet">
 
         <!-- Theme Styles -->
         <link href="../assets/css/alpha.min.css" rel="stylesheet" type="text/css" />
@@ -48,7 +44,7 @@ if (strlen($_SESSION['alogin']) == 0) {
                             <div class="card stats-card">
                                 <div class="card-content">
 
-                                    <span class="card-title">Totle Regd Employee</span>
+                                    <span class="card-title">จำนวนพนักงาน</span>
                                     <span class="stats-counter">
                                         <?php
                                         $sql = "SELECT id from tblemployees";
@@ -71,7 +67,7 @@ if (strlen($_SESSION['alogin']) == 0) {
                             <div class="card stats-card">
                                 <div class="card-content">
 
-                                    <span class="card-title">Listed Departments </span>
+                                    <span class="card-title">จำนวนแผนก </span>
                                     <?php
                                     $sql = "SELECT id from tbldepartments";
                                     $query = $dbh->prepare($sql);
@@ -92,7 +88,7 @@ if (strlen($_SESSION['alogin']) == 0) {
                         <div class="col s12 m12 l4">
                             <div class="card stats-card">
                                 <div class="card-content">
-                                    <span class="card-title">Listed leave Type</span>
+                                    <span class="card-title">จำนวนประเภทการลา</span>
                                     <?php
                                     $sql = "SELECT id from  tblleavetype";
                                     $query = $dbh->prepare($sql);
@@ -109,13 +105,11 @@ if (strlen($_SESSION['alogin']) == 0) {
                             </div>
                         </div>
                     </a>
-
-
                     <a href="leaves.php" target="blank">
                         <div class="col s12 m12 l4">
                             <div class="card stats-card">
                                 <div class="card-content">
-                                    <span class="card-title">Total Leaves</span>
+                                    <span class="card-title">จำนวนการลา</span>
                                     <?php
                                     $sql = "SELECT id from  tblleaves";
                                     $query = $dbh->prepare($sql);
@@ -132,12 +126,11 @@ if (strlen($_SESSION['alogin']) == 0) {
                             </div>
                         </div>
                     </a>
-
                     <a href="approvedleave-history.php" target="blank">
                         <div class="col s12 m12 l4">
                             <div class="card stats-card">
                                 <div class="card-content">
-                                    <span class="card-title">Approved Leaves</span>
+                                    <span class="card-title">จำนวนการอนุมัติ</span>
                                     <?php
                                     $sql = "SELECT id from  tblleaves where Status=1";
                                     $query = $dbh->prepare($sql);
@@ -154,14 +147,11 @@ if (strlen($_SESSION['alogin']) == 0) {
                             </div>
                         </div>
                     </a>
-
-
-
                     <a href="pending-leavehistory.php" target="blank">
                         <div class="col s12 m12 l4">
                             <div class="card stats-card">
                                 <div class="card-content">
-                                    <span class="card-title">New Leaves Applications</span>
+                                    <span class="card-title">จำนวนการลาใหม่</span>
                                     <?php
                                     $sql = "SELECT id from  tblleaves where Status=0";
                                     $query = $dbh->prepare($sql);
@@ -178,38 +168,26 @@ if (strlen($_SESSION['alogin']) == 0) {
                             </div>
                         </div>
                     </a>
-
-
-
-
-
-
-
-
-
                 </div>
-
                 <div class="row no-m-t no-m-b">
                     <div class="col s15 m12 l12">
                         <div class="card invoices-card">
                             <div class="card-content">
-
                                 <span class="card-title">Latest Leave Applications</span>
                                 <table id="example" class="display responsive-table ">
                                     <thead>
                                         <tr>
-                                            <th>#</th>
-                                            <th width="200">Employe Name</th>
-                                            <th width="120">Leave Type</th>
-
-                                            <th width="180">Posting Date</th>
-                                            <th>Status</th>
-                                            <th align="center">Action</th>
+                                            <th class="center" width="5%">#</th>
+                                            <th class="center" width="40%">ชื่อพนักงาน</th>
+                                            <th class="center" width="20%">ประเภทการลา</th>
+                                            <th class="center" width="10%">วันที่กรอกข้อมูล</th>
+                                            <th class="center" width="10%">สถานะ</th>
+                                            <th class="center" align="center">จัดการ</th>
                                         </tr>
                                     </thead>
 
                                     <tbody>
-                                        <?php $sql = "SELECT tblleaves.id as lid,tblemployees.FirstName,tblemployees.LastName,tblemployees.EmpId,tblemployees.id,tblleaves.LeaveType,tblleaves.PostingDate,tblleaves.Status from tblleaves join tblemployees on tblleaves.empid=tblemployees.id order by lid desc limit 6";
+                                        <?php $sql = "SELECT tblleaves.id as lid,tblemployees.FirstName,tblemployees.LastName,tblemployees.EmpId,tblemployees.id,tblleaves.LeaveType,tblleaves.PostingDate,tblleaves.Status from tblleaves join tblemployees on tblleaves.empid=tblemployees.id order by lid desc ";
                                         $query = $dbh->prepare($sql);
                                         $query->execute();
                                         $results = $query->fetchAll(PDO::FETCH_OBJ);
@@ -219,27 +197,35 @@ if (strlen($_SESSION['alogin']) == 0) {
                                         ?>
 
                                                 <tr>
-                                                    <td> <b><?php echo htmlentities($cnt); ?></b></td>
-                                                    <td><a href="editemployee.php?empid=<?php echo htmlentities($result->id); ?>" target="_blank"><?php echo htmlentities($result->FirstName . " " . $result->LastName); ?>(<?php echo htmlentities($result->EmpId); ?>)</a></td>
-                                                    <td><?php echo htmlentities($result->LeaveType); ?></td>
-                                                    <td><?php echo htmlentities($result->PostingDate); ?></td>
-                                                    <td><?php $stats = $result->Status;
+                                                    <td class="center"> <b><?php echo htmlentities($cnt); ?></b></td>
+                                                    <td><?php echo htmlentities($result->FirstName . " " . $result->LastName); ?></td>
+                                                    <td class="center">
+                                                    <?php 
+                                                    $leaveTypeId = $result->LeaveType;
+                                                    $sql = "SELECT LeaveType FROM tblleavetype WHERE id = :id";
+                                                    $query = $dbh->prepare($sql);
+                                                    $query->bindParam(':id', $leaveTypeId, PDO::PARAM_INT);
+                                                    $query->execute();
+                                                    $leaveTypeResult = $query->fetch(PDO::FETCH_OBJ);
+                                                    echo htmlentities($leaveTypeResult->LeaveType);
+                                                    ?>
+                                                    </td>
+                                                    <td class="center"><?php echo htmlentities($result->PostingDate); ?></td>
+                                                    <td class="center"><?php $stats = $result->Status;
                                                         if ($stats == 1) {
                                                         ?>
-                                                            <span style="color: green">Approved</span>
+                                                            <span style="color: green">อนุมัติ</span>
                                                         <?php }
                                                         if ($stats == 2) { ?>
-                                                            <span style="color: red">Not Approved</span>
+                                                            <span style="color: red">ไม่อนุมัติ</span>
                                                         <?php }
                                                         if ($stats == 0) { ?>
-                                                            <span style="color: blue">waiting for approval</span>
+                                                            <span style="color: blue">อยู่ระหว่างพิจารณา</span>
                                                         <?php } ?>
 
 
                                                     </td>
-
-                                                    <td>
-                                                    <td><a href="leave-details.php?leaveid=<?php echo htmlentities($result->lid); ?>" class="waves-effect waves-light btn blue m-b-xs"> View Details</a></td>
+                                                    <td class="center"><a href="leave-details.php?leaveid=<?php echo htmlentities($result->lid); ?>" class="waves-effect waves-light btn blue m-b-xs"> ดูรายละเอียด</a></td>
                                                 </tr>
                                         <?php $cnt++;
                                             }
@@ -251,31 +237,19 @@ if (strlen($_SESSION['alogin']) == 0) {
                     </div>
                 </div>
             </div>
-
         </main>
-
-        </div>
-
-
-
+        <div class="left-sidebar-hover"></div>
         <!-- Javascripts -->
         <script src="../assets/plugins/jquery/jquery-2.2.0.min.js"></script>
         <script src="../assets/plugins/materialize/js/materialize.min.js"></script>
         <script src="../assets/plugins/material-preloader/js/materialPreloader.min.js"></script>
         <script src="../assets/plugins/jquery-blockui/jquery.blockui.js"></script>
         <script src="../assets/plugins/waypoints/jquery.waypoints.min.js"></script>
-        <script src="../assets/plugins/counter-up-master/jquery.counterup.min.js"></script>
         <script src="../assets/plugins/jquery-sparkline/jquery.sparkline.min.js"></script>
-        <script src="../assets/plugins/chart.js/chart.min.js"></script>
-        <script src="../assets/plugins/flot/jquery.flot.min.js"></script>
-        <script src="../assets/plugins/flot/jquery.flot.time.min.js"></script>
-        <script src="../assets/plugins/flot/jquery.flot.symbol.min.js"></script>
-        <script src="../assets/plugins/flot/jquery.flot.resize.min.js"></script>
-        <script src="../assets/plugins/flot/jquery.flot.tooltip.min.js"></script>
-        <script src="../assets/plugins/curvedlines/curvedLines.js"></script>
         <script src="../assets/plugins/peity/jquery.peity.min.js"></script>
+        <script src="../assets/plugins/datatables/js/jquery.dataTables.min.js"></script>
         <script src="../assets/js/alpha.min.js"></script>
-        <script src="../assets/js/pages/dashboard.js"></script>
+        <script src="../assets/js/pages/table-data.js"></script>
 
     </body>
 

@@ -56,11 +56,12 @@ if (strlen($_SESSION['alogin']) == 0) {
                             <table id="example" class="display responsive-table ">
                                 <thead>
                                     <tr>
-                                        <th>Sr no</th>
-                                        <th>Leave Type</th>
-                                        <th>Description</th>
-                                        <th>Creation Date</th>
-                                        <th>Action</th>
+                                        <th class="center">#</th>
+                                        <th class="center">ประเภทการลา</th>
+                                        <th class="center">รายละเอียด</th>
+                                        <th class="center">จำนวนวันลา</th>
+                                        <th class="center">วันที่สร้าง</th>
+                                        <th class="center">จัดการ</th>
                                     </tr>
                                 </thead>
 
@@ -73,11 +74,12 @@ if (strlen($_SESSION['alogin']) == 0) {
                                     if ($query->rowCount() > 0) {
                                         foreach ($results as $result) {               ?>
                                             <tr>
-                                                <td> <?php echo htmlentities($cnt); ?></td>
-                                                <td><?php echo htmlentities($result->LeaveType); ?></td>
+                                                <td class="center"> <?php echo htmlentities($cnt); ?></td>
+                                                <td class="center"><?php echo htmlentities($result->LeaveType); ?></td>
                                                 <td><?php echo htmlentities($result->Description); ?></td>
-                                                <td><?php echo htmlentities($result->CreationDate); ?></td>
-                                                <td><a href="editleavetype.php?lid=<?php echo htmlentities($result->id); ?>"><i class="material-icons">mode_edit</i></a>
+                                                <td class="center"><?php echo htmlentities($result->MaxDays); ?></td>
+                                                <td class="center"><?php echo htmlentities($result->CreationDate); ?></td>
+                                                <td class="center"><a href="editleavetype.php?lid=<?php echo htmlentities($result->id); ?>"><i class="material-icons">mode_edit</i></a>
                                                     <a href="manageleavetype.php?del=<?php echo htmlentities($result->id); ?>" onclick="return confirm('Do you want to delete');"> <i class="material-icons">delete_forever</i></a>
                                                 </td>
                                             </tr>

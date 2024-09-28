@@ -73,17 +73,17 @@ if (strlen($_SESSION['alogin']) == 0) {
                             <table id="example" class="display responsive-table ">
                                 <thead>
                                     <tr>
-                                        <th>Sr no</th>
-                                        <th>Emp Id</th>
-                                        <th>Full Name</th>
-                                        <th>Department</th>
-                                        <th>Status</th>
-                                        <th>Reg Date</th>
-                                        <th>Action</th>
+                                        <th class="center">No</th>
+                                        <th class="center">รหัสพนักงาน</th>
+                                        <th class="center">ชื่อ นามสกุล</th>
+                                        <th class="center">แผนก</th>
+                                        <th class="center">สถานะ</th>
+                                        <th class="center">วันเริ่มงาน</th>
+                                        <th class="center">จัดการ</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php $sql = "SELECT EmpId,FirstName,LastName,Department,Status,RegDate,id from  tblemployees";
+                                    <?php $sql = "SELECT EmpId,FirstName,LastName,Department,Status,HireDate,id from  tblemployees";
                                     $query = $dbh->prepare($sql);
                                     $query->execute();
                                     $results = $query->fetchAll(PDO::FETCH_OBJ);
@@ -92,19 +92,30 @@ if (strlen($_SESSION['alogin']) == 0) {
                                         foreach ($results as $result) {               ?>
                                             <tr>
                                                 <td> <?php echo htmlentities($cnt); ?></td>
-                                                <td><?php echo htmlentities($result->EmpId); ?></td>
+                                                <td class="center"><?php echo htmlentities($result->EmpId); ?></td>
                                                 <td><?php echo htmlentities($result->FirstName); ?>&nbsp;<?php echo htmlentities($result->LastName); ?></td>
-                                                <td><?php echo htmlentities($result->Department); ?></td>
-                                                <td><?php $stats = $result->Status;
-                                                    if ($stats) {
+                                                <td class="center">
+                                                    <?php
+                                                    $id = $result->Department;
+                                                    $sql = "SELECT DepartmentName FROM tbldepartments WHERE id = :id";
+                                                    $query = $dbh->prepare($sql);
+                                                    $query->bindParam(':id', $id, PDO::PARAM_INT);
+                                                    $query->execute();
+                                                    $department = $query->fetch(PDO::FETCH_OBJ);
+                                                    echo htmlentities($department->DepartmentName ?? 'N/A');
                                                     ?>
+                                                </td>
+                                                <td class="center"><?php $stats = $result->Status;
+                                                                    if ($stats) {
+                                                                    ?>
                                                         <a class="waves-effect waves-green btn-flat m-b-xs">Active</a>
                                                     <?php } else { ?>
                                                         <a class="waves-effect waves-red btn-flat m-b-xs">Inactive</a>
                                                     <?php } ?>
                                                 </td>
-                                                <td><?php echo htmlentities($result->RegDate); ?></td>
-                                                <td><a href="editemployee.php?empid=<?php echo htmlentities($result->id); ?>"><i class="material-icons">mode_edit</i></a>
+                                                <td class="center"><?php echo htmlentities($result->HireDate); ?></td>
+                                                <td class="center">
+                                                    <a href="editemployee.php?empid=<?php echo htmlentities($result->id); ?>"><i class="material-icons">mode_edit</i></a>
                                                     <?php if ($result->Status == 1) { ?>
                                                         <a href="manageemployee.php?inid=<?php echo htmlentities($result->id); ?>" onclick="return confirm('Are you sure you want to inactive this Employe?');"" > <i class=" material-icons" title="Inactive">clear</i>
                                                         <?php } else { ?>

@@ -9,10 +9,12 @@ if (strlen($_SESSION['alogin']) == 0) {
         $lid = intval($_GET['lid']);
         $leavetype = $_POST['leavetype'];
         $description = $_POST['description'];
-        $sql = "update tblleavetype set LeaveType=:leavetype,Description=:description where id=:lid";
+        $maxdays = $_POST['maxdays'];
+        $sql = "update tblleavetype set LeaveType=:leavetype,Description=:description,MaxDays=:maxdays where id=:lid";
         $query = $dbh->prepare($sql);
         $query->bindParam(':leavetype', $leavetype, PDO::PARAM_STR);
         $query->bindParam(':description', $description, PDO::PARAM_STR);
+        $query->bindParam(':maxdays', $maxdays, PDO::PARAM_INT);
         $query->bindParam(':lid', $lid, PDO::PARAM_STR);
         $query->execute();
 
@@ -27,13 +29,10 @@ if (strlen($_SESSION['alogin']) == 0) {
     <head>
 
         <!-- Title -->
-        <title>Admin | Edit Leave Type</title>
+        <title>Admin | จัดการประเภทการลา</title>
 
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
         <meta charset="UTF-8">
-        <meta name="description" content="Responsive Admin Dashboard Template" />
-        <meta name="keywords" content="admin,dashboard" />
-        <meta name="author" content="Steelcoders" />
 
         <!-- Styles -->
         <link type="text/css" rel="stylesheet" href="../assets/plugins/materialize/css/materialize.min.css" />
@@ -41,25 +40,6 @@ if (strlen($_SESSION['alogin']) == 0) {
         <link href="../assets/plugins/material-preloader/css/materialPreloader.min.css" rel="stylesheet">
         <link href="../assets/css/alpha.min.css" rel="stylesheet" type="text/css" />
         <link href="../assets/css/custom.css" rel="stylesheet" type="text/css" />
-        <style>
-            .errorWrap {
-                padding: 10px;
-                margin: 0 0 20px 0;
-                background: #fff;
-                border-left: 4px solid #dd3d36;
-                -webkit-box-shadow: 0 1px 1px 0 rgba(0, 0, 0, .1);
-                box-shadow: 0 1px 1px 0 rgba(0, 0, 0, .1);
-            }
-
-            .succWrap {
-                padding: 10px;
-                margin: 0 0 20px 0;
-                background: #fff;
-                border-left: 4px solid #5cb85c;
-                -webkit-box-shadow: 0 1px 1px 0 rgba(0, 0, 0, .1);
-                box-shadow: 0 1px 1px 0 rgba(0, 0, 0, .1);
-            }
-        </style>
     </head>
 
     <body>
@@ -69,7 +49,7 @@ if (strlen($_SESSION['alogin']) == 0) {
         <main class="mn-inner">
             <div class="row">
                 <div class="col s12">
-                    <div class="page-title">Edit Leave Type</div>
+                    <div class="page-title">จัดการประเภทการลา</div>
                 </div>
                 <div class="col s12 m12 l6">
                     <div class="card">
@@ -77,7 +57,7 @@ if (strlen($_SESSION['alogin']) == 0) {
 
                             <div class="row">
                                 <form class="col s12" name="chngpwd" method="post">
-                                    <?php if ($error) { ?><div class="errorWrap"><strong>ERROR</strong> : <?php echo htmlentities($error); ?> </div><?php } else if ($msg) { ?><div class="succWrap"><strong>SUCCESS</strong> : <?php echo htmlentities($msg); ?> </div><?php } ?>
+                                    <?php if ($error) { ?><div class="errorWrap"><strong>เกิดข้อผิดพลาด</strong> : <?php echo htmlentities($error); ?> </div><?php } else if ($msg) { ?><div class="succWrap"><strong>บันทึกสำเร็จ</strong> : <?php echo htmlentities($msg); ?> </div><?php } ?>
                                     <?php
                                         $lid = intval($_GET['lid']);
                                         $sql = "SELECT * from tblleavetype where id=:lid";
@@ -92,11 +72,18 @@ if (strlen($_SESSION['alogin']) == 0) {
                                                 <div class="row">
                                                     <div class="input-field col s12">
                                                         <input id="leavetype" type="text" class="validate" autocomplete="off" name="leavetype" value="<?php echo htmlentities($result->LeaveType); ?>" required>
-                                                        <label for="leavetype">Leave Type</label>
+                                                        <label for="leavetype">ประเภทการลา</label>
                                                     </div>
                                                     <div class="input-field col s12">
                                                         <textarea id="textarea1" name="description" class="materialize-textarea" name="description" length="500"><?php echo htmlentities($result->Description); ?></textarea>
-                                                        <label for="deptshortname">Description</label>
+                                                        <label for="deptshortname">รายละเอียด</label>
+                                                    </div>
+                                                    <div class="input-field col s12">
+                                                        <input id="maxdays" type="number" class="validate" autocomplete="off" value="<?php echo htmlentities($result->MaxDays); ?>"
+                                                            name="maxdays" required>
+                                                        <label for="maxdays">
+                                                            จำนวนวันลา
+                                                        </label>
                                                     </div>
                                                 </div>
 
@@ -104,7 +91,7 @@ if (strlen($_SESSION['alogin']) == 0) {
                                         } 
                                     ?>
                                     <div class="input-field col s12">
-                                        <button type="submit" name="update" class="waves-effect waves-light btn indigo m-b-xs">Update</button>
+                                        <button type="submit" name="update" class="waves-effect waves-light btn indigo m-b-xs">แก้ไข</button>
                                     </div>
                                 </form>
                             </div>
