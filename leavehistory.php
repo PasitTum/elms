@@ -54,7 +54,7 @@ if (strlen($_SESSION['emplogin']) == 0) {
                                         <th class="center">ถึง</th>
                                         <th class="center" width="130">วันที่สร้างข้อมูล</th>
                                         <th class="center">สถานะ</th>
-                                        <th class="center">Action</th>
+                                        <th class="center">รายละเอียด</th>
                                     </tr>
                                 </thead>
 
@@ -79,18 +79,18 @@ if (strlen($_SESSION['emplogin']) == 0) {
                                                 <td class="center"><?php $stats = $result->Status;
                                                     if ($stats == 1) {
                                                     ?>
-                                                        <span style="color: green">Approved</span>
+                                                        <span style="color: green">อนุมัติ</span>
                                                     <?php }
                                                     if ($stats == 2) { ?>
-                                                        <span style="color: red">Not Approved</span>
+                                                        <span style="color: red">ไม่อนุมัติ</span>
                                                     <?php }
                                                     if ($stats == 0) { ?>
-                                                        <span style="color: blue">waiting for approval</span>
+                                                        <span style="color: blue">อยู่ระหว่างพิจารณา</span>
                                                     <?php } ?>
 
                                                 </td>
                                                 <td class="center">
-                                                    <a href="leave-details.php?leaveid=<?php echo htmlentities($result->lid); ?>" class="waves-effect waves-light btn blue m-b-xs"> View Details</a>
+                                                    <a href="leave-details.php?leaveid=<?php echo htmlentities($result->lid); ?>" class="waves-effect waves-light btn blue m-b-xs"> คลิ๊กดูรายละเอียด</a>
                                                 </td>
                                             </tr>
                                     <?php $cnt++;

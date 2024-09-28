@@ -5,34 +5,6 @@ include('includes/config.php');
 if (strlen($_SESSION['emplogin']) == 0) {
     header('location:index.php');
 } else {
-    $eid = $_SESSION['emplogin'];
-    if (isset($_POST['update'])) {
-
-        $fname = $_POST['firstName'];
-        $lname = $_POST['lastName'];
-        $gender = $_POST['gender'];
-        $dob = $_POST['dob'];
-        $department = $_POST['department'];
-        $address = $_POST['address'];
-        $city = $_POST['city'];
-        $country = $_POST['country'];
-        $mobileno = $_POST['mobileno'];
-        $sql = "update tblemployees set FirstName=:fname,LastName=:lname,Gender=:gender,Dob=:dob,Department=:department,Address=:address,City=:city,Country=:country,Phonenumber=:mobileno where EmailId=:eid";
-        $query = $dbh->prepare($sql);
-        $query->bindParam(':fname', $fname, PDO::PARAM_STR);
-        $query->bindParam(':lname', $lname, PDO::PARAM_STR);
-        $query->bindParam(':gender', $gender, PDO::PARAM_STR);
-        $query->bindParam(':dob', $dob, PDO::PARAM_STR);
-        $query->bindParam(':department', $department, PDO::PARAM_STR);
-        $query->bindParam(':address', $address, PDO::PARAM_STR);
-        $query->bindParam(':city', $city, PDO::PARAM_STR);
-        $query->bindParam(':country', $country, PDO::PARAM_STR);
-        $query->bindParam(':mobileno', $mobileno, PDO::PARAM_STR);
-        $query->bindParam(':eid', $eid, PDO::PARAM_STR);
-        $query->execute();
-        $msg = "Employee record updated Successfully";
-    }
-
 ?>
 
     <!DOCTYPE html>
@@ -52,6 +24,7 @@ if (strlen($_SESSION['emplogin']) == 0) {
         <link href="assets/plugins/material-preloader/css/materialPreloader.min.css" rel="stylesheet">
         <link href="assets/css/alpha.min.css" rel="stylesheet" type="text/css" />
         <link href="assets/css/custom.css" rel="stylesheet" type="text/css" />
+        <link rel="stylesheet" href="https://code.jquery.com/ui/1.14.0/themes/base/jquery-ui.css">
     </head>
 
     <body>
@@ -61,114 +34,125 @@ if (strlen($_SESSION['emplogin']) == 0) {
         <main class="mn-inner">
             <div class="row">
                 <div class="col s12">
-                    <div class="page-title">Update employee</div>
+                    <div class="page-title">ข้อมูลส่วนตัว</div>
                 </div>
                 <div class="col s12 m12 l12">
                     <div class="card">
                         <div class="card-content">
-                            <form id="example-form" method="post" name="updatemp">
-                                <div>
-                                    <h3>Update Employee Info</h3>
-                                    <?php if ($error) { ?><div class="errorWrap"><strong>ERROR</strong>:<?php echo htmlentities($error); ?> </div><?php } else if ($msg) { ?><div class="succWrap"><strong>บันทึกสำเร็จ]</strong> : <?php echo htmlentities($msg); ?> </div><?php } ?>
-                                    <section>
-                                        <div class="wizard-content">
-                                            <div class="row">
-                                                <div class="col m6">
-                                                    <div class="row">
-                                                        <?php
-                                                        $eid = $_SESSION['emplogin'];
-                                                        $sql = "SELECT * from  tblemployees where EmpId=:eid";
-                                                        $query = $dbh->prepare($sql);
-                                                        $query->bindParam(':eid', $eid, PDO::PARAM_STR);
-                                                        $query->execute();
-                                                        $results = $query->fetchAll(PDO::FETCH_OBJ);
-                                                        $cnt = 1;
-                                                        if ($query->rowCount() > 0) {
-                                                            foreach ($results as $result) {               ?>
-                                                                <div class="input-field col  s12">
-                                                                    <label for="empcode">
-                                                                        Employee Code
-                                                                    </label>
-                                                                    <input name="empcode" id="empcode" value="<?php echo htmlentities($result->EmpId); ?>" type="text" autocomplete="off" readonly required>
-                                                                    <span id="empid-availability" style="font-size:12px;"></span>
-                                                                </div>
-                                                                <div class="input-field col m6 s12">
-                                                                    <label for="firstName">First name</label>
-                                                                    <input id="firstName" name="firstName" value="<?php echo htmlentities($result->FirstName); ?>" type="text" required>
-                                                                </div>
-                                                                <div class="input-field col m6 s12">
-                                                                    <label for="lastName">Last name </label>
-                                                                    <input id="lastName" name="lastName" value="<?php echo htmlentities($result->LastName); ?>" type="text" autocomplete="off" required>
-                                                                </div>
-                                                                <div class="input-field col s12">
-                                                                    <label for="email">Email</label>
-                                                                    <input name="email" type="email" id="email" value="<?php echo htmlentities($result->EmailId); ?>" readonly autocomplete="off" required>
-                                                                    <span id="emailid-availability" style="font-size:12px;"></span>
-                                                                </div>
-                                                                <div class="input-field col s12">
-                                                                    <label for="phone">Mobile number</label>
-                                                                    <input id="phone" name="mobileno" type="tel" value="<?php echo htmlentities($result->Phonenumber); ?>" maxlength="10" autocomplete="off" required>
-                                                                </div>
+                            <div>
+                                <h3>ข้อมูลส่วนตัว</h3>
+                                <section>
+                                    <div class="wizard-content">
+                                        <div class="row">
+                                            <div class="col m6">
+                                                <div class="row">
+                                                    <?php
+                                                    $eid = $_SESSION['emplogin'];
+                                                    $sql = "SELECT * from  tblemployees where EmpId=:eid";
+                                                    $query = $dbh->prepare($sql);
+                                                    $query->bindParam(':eid', $eid, PDO::PARAM_STR);
+                                                    $query->execute();
+                                                    $results = $query->fetchAll(PDO::FETCH_OBJ);
+                                                    $cnt = 1;
+                                                    if ($query->rowCount() > 0) {
+                                                        foreach ($results as $result) {               ?>
+                                                            <div class="input-field col m4 s12">
+                                                                <label for="empcode">
+                                                                    รหัสพนักงาน
+                                                                </label>
+                                                                <input name="empcode" id="empcode" value="<?php echo htmlentities($result->EmpId); ?>" type="text" autocomplete="off" readonly required>
+                                                                <span id="empid-availability" style="font-size:12px;"></span>
                                                             </div>
-                                                </div>
+                                                            <div class="input-field col m4 s12">
+                                                                <select name="department" autocomplete="off" disabled>
+                                                                    <?php $sql = "SELECT DepartmentName from tbldepartments";
+                                                                    $query = $dbh->prepare($sql);
+                                                                    $query->execute();
+                                                                    $results = $query->fetchAll(PDO::FETCH_OBJ);
+                                                                    $cnt = 1;
+                                                                    if ($query->rowCount() > 0) {
+                                                                        foreach ($results as $resultt) {  
+                                                                            $selected = ($result->id == $Department) ? 'selected' : '';
+                                                                    ?>
+                                                                            <option value="<?php echo htmlentities($resultt->id); ?>" <?php echo $selected; ?>><?php echo htmlentities($resultt->DepartmentName); ?></option>
+                                                                    <?php }
+                                                                    } ?>
+                                                                </select>
+                                                                <label>แผนก</label>
+                                                            </div>
+                                                            <div class="input-field col m4 s12">
+                                                                <label for="position">ตำแหน่ง</label>
+                                                                <input id="position" name="position" value="<?php echo htmlentities($result->Position); ?>" type="text" readonly required>
+                                                            </div>
+                                                            <div class="input-field col m6 s12">
+                                                                <label for="firstName">ชื่อ</label>
+                                                                <input id="firstName" name="firstName" value="<?php echo htmlentities($result->FirstName); ?>" type="text" readonly required>
+                                                            </div>
+                                                            <div class="input-field col m6 s12">
+                                                                <label for="lastName">นามสกุล</label>
+                                                                <input id="lastName" name="lastName" value="<?php echo htmlentities($result->LastName); ?>" type="text" autocomplete="off" readonly required>
+                                                            </div>
+                                                            <div class="col m6 s12 datePkr">
+                                                                <label for="birthdate">วัน เดือน ปีเกิด</label>
+                                                                <input id="birthdate" name="dob" class="datepicker" value="<?php echo htmlentities($result->Dob); ?>" readonly>
+                                                            </div>
+                                                            <div class="input-field col m6 s12">
+                                                                <label for="email">อีเมล</label>
+                                                                <input name="email" type="email" id="email" value="<?php echo htmlentities($result->EmailId); ?>" readonly autocomplete="off" readonly required>
+                                                                <span id="emailid-availability" style="font-size:12px;"></span>
+                                                            </div>
+                                                        </div>
+                                            </div>
 
-                                                <div class="col m6">
-                                                    <div class="row">
-                                                        <div class="input-field col m6 s12">
-                                                            <select name="gender" autocomplete="off">
-                                                                <option value="<?php echo htmlentities($result->Gender); ?>"><?php echo htmlentities($result->Gender); ?></option>
-                                                                <option value="Male">Male</option>
-                                                                <option value="Female">Female</option>
-                                                                <option value="Other">Other</option>
-                                                            </select>
-                                                        </div>
-                                                        <label for="birthdate">Date of Birth</label>
-                                                        <div class="input-field col m6 s12">
-                                                            <input id="birthdate" name="dob" class="datepicker" value="<?php echo htmlentities($result->Dob); ?>">
-                                                        </div>
-                                                        <div class="input-field col m6 s12">
-                                                            <select name="department" autocomplete="off">
-                                                                <option value="<?php echo htmlentities($result->Department); ?>"><?php echo htmlentities($result->Department); ?></option>
-                                                                <?php $sql = "SELECT DepartmentName from tbldepartments";
-                                                                $query = $dbh->prepare($sql);
-                                                                $query->execute();
-                                                                $results = $query->fetchAll(PDO::FETCH_OBJ);
-                                                                $cnt = 1;
-                                                                if ($query->rowCount() > 0) {
-                                                                    foreach ($results as $resultt) {   ?>
-                                                                        <option value="<?php echo htmlentities($resultt->DepartmentName); ?>"><?php echo htmlentities($resultt->DepartmentName); ?></option>
-                                                                <?php }
-                                                                } ?>
-                                                            </select>
-                                                        </div>
-                                                        <div class="input-field col m6 s12">
-                                                            <label for="address">Address</label>
-                                                            <input id="address" name="address" type="text" value="<?php echo htmlentities($result->Address); ?>" autocomplete="off" required>
-                                                        </div>
-
-                                                        <div class="input-field col m6 s12">
-                                                            <label for="city">City/Town</label>
-                                                            <input id="city" name="city" type="text" value="<?php echo htmlentities($result->City); ?>" autocomplete="off" required>
-                                                        </div>
-
-                                                        <div class="input-field col m6 s12">
-                                                            <label for="country">Country</label>
-                                                            <input id="country" name="country" type="text" value="<?php echo htmlentities($result->Country); ?>" autocomplete="off" required>
-                                                        </div>
-                                                        
+                                            <div class="col m6">
+                                                <div class="row">
+                                                    <div class="input-field col m6 s12">
+                                                        <select name="gender" autocomplete="off" disabled>
+                                                            <option value="<?php echo htmlentities($result->Gender); ?>"><?php echo htmlentities($result->Gender); ?></option>
+                                                            <option value="Male">ชาย</option>
+                                                            <option value="Female">หญิง</option>
+                                                            <option value="Other">อื่นๆ</option>
+                                                        </select>
+                                                        <label>เพศ</label>
                                                     </div>
-                                                    <?php }
-                                                        } ?>
+                                                    <div class="col m6 s12 datePkr">
+                                                        <label for="HireDate">วันที่เริ่มงาน</label>
+                                                        <input id="HireDate" name="HireDate" class="datepicker" value="<?php echo htmlentities($result->HireDate); ?>" maxlength="10" autocomplete="off" readonly required>
+                                                    </div>
+                                                    <div class="input-field col m6 s12">
+                                                        <label for="address">ที่อยู่</label>
+                                                        <input id="address" name="address" type="text" value="<?php echo htmlentities($result->Address); ?>" autocomplete="off" readonly required>
+                                                    </div>
 
-                                                    <div class="input-field col s12">
-                                                        <button type="submit" name="update" id="update" class="waves-effect waves-light btn indigo m-b-xs">UPDATE</button>
+                                                    <div class="input-field col m6 s12">
+                                                        <label for="city">จังหวัด</label>
+                                                        <input id="city" name="city" type="text" value="<?php echo htmlentities($result->City); ?>" autocomplete="off" readonly required>
+                                                    </div>
+
+                                                    <div class="input-field col m6 s12">
+                                                        <label for="Aumphures">เขต/อำเภอ</label>
+                                                        <input id="Aumphures" name="Aumphures" type="text" value="<?php echo htmlentities($result->Aumphures); ?>" autocomplete="off" readonly required>
+                                                    </div>
+                                                    <div class="input-field col m6 s12">
+                                                        <label for="Tambon">แขวง/ตำบล</label>
+                                                        <input id="Tambon" name="Tambon" type="text" value="<?php echo htmlentities($result->Tambon); ?>" autocomplete="off" readonly required>
+                                                    </div>
+                                                    <div class="input-field col m6 s12">
+                                                        <label for="PostCode">รหัสไปรษณีย์</label>
+                                                        <input id="PostCode" name="PostCode" type="text" value="<?php echo htmlentities($result->PostCode); ?>" autocomplete="off" readonly required>
+                                                    </div>
+                                                    <div class="input-field col m6 s12">
+                                                        <label for="phone">เบอร์โทรศัพท์</label>
+                                                        <input id="phone" name="mobileno" type="tel" value="<?php echo htmlentities($result->Phonenumber); ?>" maxlength="10" autocomplete="off" readonly required>
                                                     </div>
                                                 </div>
+                                                <?php }
+                                                    } ?>
                                             </div>
                                         </div>
-                                    </section>
-                                </div>
-                            </form>
+                                    </div>
+                                </section>
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -11,50 +11,6 @@
                         <div class="header-title col s3">
                             <span class="chapter-title">โปรแกรมบันทึกการลางาน</span>
                         </div>
-                        <ul class="right col s9 m3 nav-right-menu">
-                            <li class="hide-on-small-and-down"><a href="javascript:void(0)" data-activates="dropdown1" class="dropdown-button dropdown-right show-on-large"><i class="material-icons">notifications_none</i>
-                                    <?php
-                                    $isread = 0;
-                                    $sql = "SELECT id from tblleaves where IsRead=:isread";
-                                    $query = $dbh->prepare($sql);
-                                    $query->bindParam(':isread', $isread, PDO::PARAM_STR);
-                                    $query->execute();
-                                    $results = $query->fetchAll(PDO::FETCH_OBJ);
-                                    $unreadcount = $query->rowCount(); ?>
-                                    <span class="badge"><?php echo htmlentities($unreadcount); ?></span></a></li>
-                            <li class="hide-on-med-and-up"><a href="javascript:void(0)" class="search-toggle"><i class="material-icons">search</i></a></li>
-                        </ul>
-
-                        <ul id="dropdown1" class="dropdown-content notifications-dropdown">
-                            <li class="notificatoins-dropdown-container">
-                                <ul>
-                                    <?php
-                                    $isread = 0;
-                                    $sql = "SELECT tblleaves.id as lid,tblemployees.FirstName,tblemployees.LastName,tblemployees.EmpId,tblleaves.PostingDate from tblleaves join tblemployees on tblleaves.empid=tblemployees.id where tblleaves.IsRead=:isread";
-                                    $query = $dbh->prepare($sql);
-                                    $query->bindParam(':isread', $isread, PDO::PARAM_STR);
-                                    $query->execute();
-                                    $results = $query->fetchAll(PDO::FETCH_OBJ);
-                                    if ($query->rowCount() > 0) {
-                                        foreach ($results as $result) {               ?>
-                                                <li>
-                                                    <a href="javascript:void(0);" onclick="markAsRead(<?php echo htmlentities($result->lid); ?>)">
-                                                        <div class="notification">
-                                                            <div class="notification-icon circle cyan"><i class="material-icons">done</i></div>
-                                                            <div class="notification-text">
-                                                                <p><b><?php echo htmlentities($result->FirstName . " " . $result->LastName); ?><br />(<?php echo htmlentities($result->EmpId); ?>)</b> applied for leave</p>
-                                                                <span>at <?php echo htmlentities($result->PostingDate); ?></span>
-                                                            </div>
-                                                        </div>
-                                                    </a>
-                                                </li>
-                                    <?php }
-                                    } ?>
-
-
-                                </ul>
-                            </li>
-                        </ul>
                     </div>
                 </nav>
             </header>

@@ -108,52 +108,46 @@ if (strlen($_SESSION['emplogin']) == 0) {
                         <div class="card invoices-card">
                             <div class="card-content">
 
-                                <span class="card-title">Latest Leave Applications</span>
+                                <span class="card-title">สิทธิ์การลา</span>
                                 <table id="example" class="display responsive-table ">
                                     <thead>
                                         <tr>
                                             <th>#</th>
-                                            <th width="200">Employe Name</th>
-                                            <th width="120">Leave Type</th>
-                                            <th width="180">Posting Date</th>
-                                            <th>Status</th>
-                                            <th align="center">Action</th>
+                                            <th class="center" width="60%">ประเภทการลา</th>
+                                            <th class="center" width="10%">จำนวนวัน</th>
+                                            <th class="center" width="10%">ใช้สิทธิ์</th>
+                                            <th class="center" width="10%">คงเหลือ</th>
                                         </tr>
                                     </thead>
-
                                     <tbody>
-                                        <?php $sql = "SELECT tblleaves.id as lid,tblemployees.FirstName,tblemployees.LastName,tblemployees.EmpId,tblemployees.id,tblleaves.LeaveType,tblleaves.PostingDate,tblleaves.Status from tblleaves join tblemployees on tblleaves.empid=tblemployees.id where tblleaves.empid='$eid' order by lid desc limit 6";
+                                    <?php 
+                                    try {
+                                        $eid = $_SESSION['eid'];
+                                        $sql = "SELECT * from vw_employee_leave_balance where EmployeeID='$eid' order by LeaveTypeID";
                                         $query = $dbh->prepare($sql);
                                         $query->execute();
                                         $results = $query->fetchAll(PDO::FETCH_OBJ);
                                         $cnt = 1;
                                         if ($query->rowCount() > 0) {
                                             foreach ($results as $result) {
-                                        ?>
-
+                                    ?>
                                                 <tr>
-                                                    <td> <b><?php echo htmlentities($cnt); ?></b></td>
-                                                    <td><a href="editemployee.php?empid=<?php echo htmlentities($result->id); ?>" target="_blank"><?php echo htmlentities($result->FirstName . " " . $result->LastName); ?>(<?php echo htmlentities($result->EmpId); ?>)</a></td>
-                                                    <td><?php echo htmlentities($result->LeaveType); ?></td>
-                                                    <td><?php echo htmlentities($result->PostingDate); ?></td>
-                                                    <td><?php $stats = $result->Status;
-                                                        if ($stats == 1) {
-                                                        ?>
-                                                            <span style="color: green">Approved</span>
-                                                        <?php }
-                                                        if ($stats == 2) { ?>
-                                                            <span style="color: red">Not Approved</span>
-                                                        <?php }
-                                                        if ($stats == 0) { ?>
-                                                            <span style="color: blue">waiting for approval</span>
-                                                        <?php } ?>
-
-                                                    </td>
-                                                    <td><a href="leave-details.php?leaveid=<?php echo htmlentities($result->lid); ?>" class="waves-effect waves-light btn blue m-b-xs"> View Details</a></td>
+                                                    <td ><?php echo htmlentities($cnt); ?></td>
+                                                    <td ><?php echo htmlentities($result->LeaveType); ?></td>
+                                                    <td class="center"><?php echo htmlentities($result->EntitledDays); ?></td>
+                                                    <td class="center"><?php echo htmlentities($result->UsedDays); ?></td>
+                                                    <td class="center"><?php echo htmlentities($result->RemainingDays); ?></td>
                                                 </tr>
-                                        <?php $cnt++;
+                                    <?php 
+                                                $cnt++;
                                             }
-                                        } ?>
+                                        } else {
+                                            echo "<tr><td colspan='5'>ไม่พบข้อมูล</td></tr>";
+                                        }
+                                    } catch (PDOException $e) {
+                                        echo "<tr><td colspan='5'>เกิดข้อผิดพลาด: " . $e->getMessage() . "</td></tr>";
+                                    }
+                                    ?>
                                     </tbody>
                                 </table>
                             </div>

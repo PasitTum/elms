@@ -1,7 +1,8 @@
 $(document).ready(function(){
     $('.datepicker').pickadate({
-        selectMonths: true, // Creates a dropdown to control month
-        selectYears: 15 // Creates a dropdown of 15 years to control year
+        selectMonths: true,
+        selectYears: 15,
+        format: 'yyyy-mm-dd' // กำหนดรูปแบบวันที่ที่ต้องการ
     });
 
     $('input.autocomplete').autocomplete({
@@ -11,7 +12,4 @@ $(document).ready(function(){
             "Google": 'assets/images/google.png'
         }
     });
-});
-$('.datepicker').datepicker({
-    format: 'yyyy-mm-dd'
 });

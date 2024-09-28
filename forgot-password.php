@@ -109,7 +109,7 @@ if (isset($_POST['change'])) {
                     <li>&nbsp;</li>
                     <li class="no-padding"><a class="waves-effect waves-grey" href="index.php"><i class="material-icons">account_box</i>พนักงานเข้าสู่ระบบ</a></li>
                     <li class="no-padding"><a class="waves-effect waves-grey" href="forgot-password.php"><i class="material-icons">account_box</i>ลืมรหัสผ่าน</a></li>
-                    <!-- <li class="no-padding"><a class="waves-effect waves-grey" href="admin/"><i class="material-icons">account_box</i>Admin Login</a></li> -->
+                    <li class="no-padding"><a class="waves-effect waves-grey" href="admin/"><i class="material-icons">account_box</i>Admin Login</a></li>
                 </ul>
                 <div class="footer">
                 </div>
@@ -141,7 +141,6 @@ if (isset($_POST['change'])) {
                                         </div>
                                     </form>
                                 </div>
-                            </div>
                             <?php if (isset($_POST['submit'])) {
                                 $empid = $_POST['empid'];
                                 $email = $_POST['emailid'];
@@ -158,37 +157,32 @@ if (isset($_POST['change'])) {
                             ?>
 
                                     <div class="row">
-                                        <span class="card-title" style="font-size:20px;">change your password </span>
                                         <form class="col s12" name="udatepwd" method="post">
                                             <div class="input-field col s12">
                                                 <input id="password" type="password" name="newpassword" class="validate" autocomplete="off" required>
-                                                <label for="password">New Password</label>
+                                                <label for="password">รหัสใหม่</label>
                                             </div>
 
                                             <div class="input-field col s12">
                                                 <input id="password" type="password" name="confirmpassword" class="validate" autocomplete="off" required>
-                                                <label for="password">Confirm Password</label>
+                                                <label for="password">ยินยันรหัสใหม่</label>
                                             </div>
 
 
                                             <div class="input-field col s12">
-                                                <button type="submit" name="change" class="waves-effect waves-light btn indigo m-b-xs" onclick="return valid();">Change</button>
+                                                <button type="submit" name="change" class="waves-effect waves-light btn indigo m-b-xs" onclick="return valid();">เปลี่ยนรหัสผ่าน</button>
 
                                             </div>
                                     </div>
                                     </form>
                                 <?php } else { ?>
                                     <div class="errorWrap" style="margin-left: 2%; font-size:22px;">
-                                        <strong>ERROR</strong> : <?php echo htmlentities("Invalid details");
+                                        <strong>ไม่พบรายการ</strong> : <?php echo htmlentities("Invalid details");
                                                                 } ?>
                                     </div>
                                 <?php } ?>
-
-
-
-
-
-
+                                
+                            </div>
                         </div>
                     </div>
                 </div>

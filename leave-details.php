@@ -86,20 +86,43 @@ if (strlen($_SESSION['emplogin']) == 0) {
                                             <td style="font-size:16px;">
                                                 <b>อีเมล :</b>
                                             </td>
-                                            <td><?php echo htmlentities($result->EmailId); ?></td>
-                                            <td style="font-size:16px;"><b>เบอร์โทร :</b></td>
-                                            <td><?php echo htmlentities($result->Phonenumber); ?></td>
+                                            <td>
+                                                <?php echo htmlentities($result->EmailId); ?>
+                                            </td>
+                                            <td style="font-size:16px;">
+                                                <b>เบอร์โทร :</b>
+                                            </td>
+                                            <td>
+                                                <?php echo htmlentities($result->Phonenumber); ?>
+                                            </td>
                                             <td>&nbsp;</td>
                                             <td>&nbsp;</td>
                                         </tr>
                                         <tr>
-                                            <td style="font-size:16px;"><b>ประเภทการลา :</b></td>
-                                            <td><?php echo htmlentities($result->LeaveType); ?></td>
+                                            <td style="font-size:16px;">
+                                                <b>ประเภทการลา :</b>
+                                            </td>
+                                            <td>
+                                            <?php 
+                                            $leaveTypeId = $result->LeaveType;
+                                            $sql = "SELECT LeaveType FROM tblleavetype WHERE id = :id";
+                                            $query = $dbh->prepare($sql);
+                                            $query->bindParam(':id', $leaveTypeId, PDO::PARAM_INT);
+                                            $query->execute();
+                                            $leaveTypeResult = $query->fetch(PDO::FETCH_OBJ);
+                                            echo htmlentities($leaveTypeResult->LeaveType);
+                                            ?>
+                                            </td>
                                             <td style="font-size:16px;"><b>วันที่ลา :</b></td>
-                                            <td>From <?php echo htmlentities($result->FromDate); ?> to
-                                                <?php echo htmlentities($result->ToDate); ?></td>
-                                            <td style="font-size:16px;"><b>วันที่กรอกข้อมูล</b></td>
-                                            <td><?php echo htmlentities($result->PostingDate); ?></td>
+                                            <td>
+                                                From <?php echo htmlentities($result->FromDate); ?> to <?php echo htmlentities($result->ToDate); ?>
+                                            </td>
+                                            <td style="font-size:16px;">
+                                                <b>วันที่กรอกข้อมูล</b>
+                                            </td>
+                                            <td>
+                                                <?php echo htmlentities($result->PostingDate); ?>
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td style="font-size:16px;"><b>รายละเอียดการลา : </b></td>
@@ -111,13 +134,13 @@ if (strlen($_SESSION['emplogin']) == 0) {
                                             <td colspan="5"><?php $stats = $result->Status;
                                                             if ($stats == 1) {
                                                             ?>
-                                                    <span style="color: green">Approved</span>
+                                                    <span style="color: green">อนุมัติ</span>
                                                 <?php }
                                                             if ($stats == 2) { ?>
-                                                    <span style="color: red">Not Approved</span>
+                                                    <span style="color: red">ไม่อนุมัติ</span>
                                                 <?php }
                                                             if ($stats == 0) { ?>
-                                                    <span style="color: blue">waiting for approval</span>
+                                                    <span style="color: blue">อยู่ระหว่างพิจารณา</span>
                                                 <?php } ?>
                                             </td>
                                         </tr>
@@ -138,7 +161,7 @@ if (strlen($_SESSION['emplogin']) == 0) {
                                             <td colspan="5">
                                                 <?php
                                                     if ($result->AdminRemarkDate == "") {
-                                                        echo "NA";
+                                                        echo "";
                                                     } else {
                                                         echo htmlentities($result->AdminRemarkDate);
                                                     }
@@ -156,7 +179,6 @@ if (strlen($_SESSION['emplogin']) == 0) {
             </div>
         </main>
 
-        </div>
         <div class="left-sidebar-hover"></div>
 
         <!-- Javascripts -->
