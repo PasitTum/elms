@@ -249,13 +249,13 @@ if (strlen($_SESSION['alogin']) == 0) {
                                                             <select id="Aumphures" name="Aumphures" required>
                                                                 <option value="" disabled selected>เลือกอำเภอ</option>
                                                             </select>
-                                                            <label for="Aumphures">อำเภอ</label>
+                                                            <label for="Aumphures">เขต/อำเภอ</label>
                                                         </div>
                                                         <div class="input-field col m6 s12">
                                                             <select id="Tambon" name="Tambon" required>
                                                                 <option value="" disabled selected>เลือกตำบล</option>
                                                             </select>
-                                                            <label for="Tambon">ตำบล</label>
+                                                            <label for="Tambon">แขวง/ตำบล</label>
                                                         </div>
                                                         <div class="input-field col m6 s12">
                                                             <label for="PostCode">รหัสไปรษณีย์</label>

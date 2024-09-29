@@ -200,15 +200,15 @@ if (strlen($_SESSION['alogin']) == 0) {
                                                     <td class="center"> <b><?php echo htmlentities($cnt); ?></b></td>
                                                     <td><?php echo htmlentities($result->FirstName . " " . $result->LastName); ?></td>
                                                     <td class="center">
-                                                    <?php 
-                                                    $leaveTypeId = $result->LeaveType;
-                                                    $sql = "SELECT LeaveType FROM tblleavetype WHERE id = :id";
-                                                    $query = $dbh->prepare($sql);
-                                                    $query->bindParam(':id', $leaveTypeId, PDO::PARAM_INT);
-                                                    $query->execute();
-                                                    $leaveTypeResult = $query->fetch(PDO::FETCH_OBJ);
-                                                    echo htmlentities($leaveTypeResult->LeaveType);
-                                                    ?>
+                                                        <?php 
+                                                        $leaveTypeId = $result->LeaveType;
+                                                        $sql = "SELECT LeaveType FROM tblleavetype WHERE id = :id";
+                                                        $query = $dbh->prepare($sql);
+                                                        $query->bindParam(':id', $leaveTypeId, PDO::PARAM_INT);
+                                                        $query->execute();
+                                                        $leaveTypeResult = $query->fetch(PDO::FETCH_OBJ);
+                                                        echo htmlentities($leaveTypeResult->LeaveType);
+                                                        ?>
                                                     </td>
                                                     <td class="center"><?php echo htmlentities($result->PostingDate); ?></td>
                                                     <td class="center"><?php $stats = $result->Status;

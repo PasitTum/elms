@@ -156,7 +156,7 @@ if (strlen($_SESSION['emplogin']) == 0) {
         <script src="assets/plugins/material-preloader/js/materialPreloader.min.js"></script>
         <script src="assets/plugins/jquery-blockui/jquery.blockui.js"></script>
         <script src="assets/js/alpha.min.js"></script>
-        <script src="assets/js/pages/form_elements.js"></script>
+        <script src="assets/js/pages/apply_leave.js"></script>
         <script src="assets/plugins/jquery-inputmask/jquery.inputmask.bundle.js"></script>
     </body>
 

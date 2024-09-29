@@ -1,6 +1,6 @@
 <aside id="slide-out" class="side-nav white fixed">
     <div class="side-nav-wrapper">
-        <div class="sidebar-profile">
+        <div class="sidebar-profile center">
             <div class="sidebar-profile-image">
                 <img src="assets/images/profile-image.png" class="circle" alt="">
             </div>

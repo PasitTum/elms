@@ -15,7 +15,7 @@ if (strlen($_SESSION['alogin']) == 0) {
     <head>
 
         <!-- Title -->
-        <title>Admin | Total Leave </title>
+        <title>Admin | การลาทั้งหมด </title>
 
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
         <meta charset="UTF-8">
@@ -37,22 +37,22 @@ if (strlen($_SESSION['alogin']) == 0) {
         <main class="mn-inner">
             <div class="row">
                 <div class="col s12">
-                    <div class="page-title">Leave History</div>
+                    <div class="page-title">ประวัติการลาทั้งหมด</div>
                 </div>
                 <div class="col s12 m12 l12">
                     <div class="card">
                         <div class="card-content">
-                            <span class="card-title">Leave History</span>
-                            <?php if ($msg) { ?><div class="succWrap"><strong>SUCCESS</strong> : <?php echo htmlentities($msg); ?> </div><?php } ?>
+                            <span class="card-title">ประวัติการลาทั้งหมด</span>
+                            <?php if ($msg) { ?><div class="succWrap"><strong>สำเร็จ</strong> : <?php echo htmlentities($msg); ?> </div><?php } ?>
                             <table id="example" class="display responsive-table ">
                                 <thead>
                                     <tr>
-                                        <th>#</th>
-                                        <th width="200">Employe Name</th>
-                                        <th width="120">Leave Type</th>
-                                        <th width="180">Posting Date</th>
-                                        <th>Status</th>
-                                        <th align="center">Action</th>
+                                        <th class="center">#</th>
+                                        <th class="center" width="30%">ชื่อ นามสกุล</th>
+                                        <th class="center" width="20%">ประเภทการลา</th>
+                                        <th class="center" width="20%">วันที่ทำรายการ</th>
+                                        <th class="center" width="10%">สถานะ</th>
+                                        <th class="center" align="center">รายละเอียด</th>
                                     </tr>
                                 </thead>
 
@@ -66,23 +66,38 @@ if (strlen($_SESSION['alogin']) == 0) {
                                         foreach ($results as $result) {
                                     ?>
                                             <tr>
-                                                <td> <b><?php echo htmlentities($cnt); ?></b></td>
-                                                <td><a href="editemployee.php?empid=<?php echo htmlentities($result->id); ?>" target="_blank"><?php echo htmlentities($result->FirstName . " " . $result->LastName); ?>(<?php echo htmlentities($result->EmpId); ?>)</a></td>
-                                                <td><?php echo htmlentities($result->LeaveType); ?></td>
-                                                <td><?php echo htmlentities($result->PostingDate); ?></td>
-                                                <td><?php $stats = $result->Status;
+                                                <td class="center"> <b><?php echo htmlentities($cnt); ?></b></td>
+                                                <td>
+                                                    <?php echo htmlentities($result->FirstName . " " . $result->LastName); ?>(<?php echo htmlentities($result->EmpId); ?>)
+                                                </td>
+                                                <td class="center">
+                                                    <?php 
+                                                        $leaveTypeId = $result->LeaveType;
+                                                        $sql = "SELECT LeaveType FROM tblleavetype WHERE id = :id";
+                                                        $query = $dbh->prepare($sql);
+                                                        $query->bindParam(':id', $leaveTypeId, PDO::PARAM_INT);
+                                                        $query->execute();
+                                                        $leaveTypeResult = $query->fetch(PDO::FETCH_OBJ);
+                                                        echo htmlentities($leaveTypeResult->LeaveType);
+                                                        ?>
+                                                </td>
+                                                <td class="center">
+                                                    <?php echo htmlentities($result->PostingDate); ?>
+                                                </td>
+                                                <td class="center">
+                                                    <?php $stats = $result->Status;
                                                     if ($stats == 1) {
                                                     ?>
-                                                        <span style="color: green">Approved</span>
+                                                        <span style="color: green">อนุมัติ</span>
                                                     <?php }
                                                     if ($stats == 2) { ?>
-                                                        <span style="color: red">Not Approved</span>
+                                                        <span style="color: red">ไม่อนุมัติ</span>
                                                     <?php }
                                                     if ($stats == 0) { ?>
-                                                        <span style="color: blue">waiting for approval</span>
+                                                        <span style="color: blue">อยู่ระหว่างพิจารณา</span>
                                                     <?php } ?>
                                                 </td>
-                                                <td><a href="leave-details.php?leaveid=<?php echo htmlentities($result->lid); ?>" class="waves-effect waves-light btn blue m-b-xs"> View Details</a></td>
+                                                <td class="center"><a href="leave-details.php?leaveid=<?php echo htmlentities($result->lid); ?>" class="waves-effect waves-light btn blue m-b-xs"> ดูรายละเอียด</a></td>
                                             </tr>
                                     <?php $cnt++;
                                         }

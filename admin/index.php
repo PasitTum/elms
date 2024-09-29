@@ -27,7 +27,7 @@ if (isset($_POST['signin'])) {
 <head>
 
     <!-- Title -->
-    <title>Employee leave management system | Admin</title>
+    <title>โปรแกรมบันทึกการลางาน | Admin</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <meta charset="UTF-8">
@@ -45,14 +45,14 @@ if (isset($_POST['signin'])) {
     <div class="mn-content valign-wrapper">
 
         <main class="mn-inner container">
-            <h4 align="center"><a href="../index.php" style="color:#000;">Employee Leave Management System | Admin Login</a></h4>
+            <h4 align="center"><a href="../index.php" style="color:#000;">โปรแกรมบันทึกการลางาน | Admin Login</a></h4>
             <div class="valign">
                 <div class="row">
 
                     <div class="col s12 m6 l4 offset-l4 offset-m3">
                         <div class="card white darken-1">
                             <div class="card-content ">
-                                <span class="card-title">Sign In</span>
+                                <span class="card-title">เข้าสู่ระบบ</span>
                                 <div class="row">
                                     <form class="col s12" name="signin" method="post">
                                         <div class="input-field col s12">
@@ -64,7 +64,6 @@ if (isset($_POST['signin'])) {
                                             <label for="password">Password</label>
                                         </div>
                                         <div class="col s12 right-align m-t-sm">
-
                                             <input type="submit" name="signin" value="Sign in" class="waves-effect waves-light btn teal">
                                         </div>
                                     </form>
